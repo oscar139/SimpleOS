@@ -1,3 +1,5 @@
 Old/
 *.pdf
 *.code-workspace
+*.vfd
+*.vfd.tags
