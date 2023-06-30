@@ -31,18 +31,23 @@ gds_data:
 
 gdt_end:
 
-; GDT 
+; GDT
+; **********************************************************************************************************************
 ; The GDT is not a segment itself; instead, it is a data structure in linear address space. The base linear address and
 ; limit of the GDT must be loaded into the GDTR register (see Section 2.4, “Memory-Management Registers”). The
 ; base address of the GDT should be aligned on an eight-byte boundary to yield the best processor performance. The
 ; limit value for the GDT is expressed in bytes. As with segments, the limit value is added to the base address to get
 ; the address of the last valid byte. A limit value of 0 results in exactly one valid byte. Because segment descriptors
 ; are always 8 bytes long, the GDT limit should always be one less than an integral multiple of eight (that is, 8N – 1).
+; **********************************************************************************************************************
+; From Intel® 64 and IA-32 Architectures Software Developer’s Manual
+; **********************************************************************************************************************
+
 gdt_register:
     dw gdt_end - gdt_start - 1  ; GDT Size
     dd gdt_start                ; Starting Address of GDT
 
 ; Calculated indexs in the GDT
 NULL_SEG equ gds_null               ; 0x00
-CODE_SEG equ gdt_code - gdt_start   ; 0x08
-DATA_SEG equ gdt_data - gdt_start   ; 0x10
+CODE_SEG equ gds_code - gdt_start   ; 0x08
+DATA_SEG equ gds_data - gdt_start   ; 0x10
