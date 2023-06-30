@@ -1,21 +1,19 @@
 %ifndef VGA_PRINT_ASM
 %define VGA_PRINT_ASM
 
-; 
+;
 ; Prints string addressed in esi to VGA memory
-; 
-
-
+;
 ; Constants
 VIDEO_MEMORY    equ 0Xb8000
 WHITE_ON_BLACK  equ 0x0f
 
 _vga_print:
-    
     pusha               ; Push all or only the used registers
-                        ; pushes in order [AX, CX, DX, BX, SP, BP, SI, DI]
-        mov ebp, esp      ; Establish Frame Stack
-        sub esp, 0       ; (optional) create space for local variables by subtracting the needed bytes from sp
+                        ; pushes in order [EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI]
+        mov ebp, esp    ; Establish Frame Stack
+        sub esp, 0      ; (optional) create space for local variables by subtracting the needed bytes from sp
+
             mov edi, VIDEO_MEMORY
             .print_loop:
                 cmp byte [esi], 0                   ; Check if we reached the null pointer and end the loop

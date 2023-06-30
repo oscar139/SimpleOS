@@ -1,5 +1,5 @@
-%ifndef 32Bit_Protected_Mode_ASM
-%define 32Bit_Protected_Mode_ASM
+%ifndef _32Bit_Protected_Mode_ASM
+%define _32Bit_Protected_Mode_ASM
 
 ; Switches to 32 bit Protected mode
 
@@ -9,12 +9,13 @@ _switch_to_32Bit_PM:
                             ; set - up the protected mode interrupt vector
                             ; otherwise interrupts will run riot.
 
-lgdt [gdt_register]   ; Load our global descriptor table , which defines
+
+lgdt [gdt_register]         ; Load our global descriptor table , which defines
                             ; the protected mode segments ( e.g. for code and data )
 
-mov eax , cr0               ; To make the switch to protected mode , we set
-or eax , 0 x1               ; the first bit of CR0 , a control register
-mov cr0 , eax
+mov eax, cr0                ; To make the switch to protected mode , we set
+or eax, 0x1                 ; the first bit of CR0 , a control register
+mov cr0, eax
 
 
 jmp CODE_SEG:init_pm        ; Make a far jump ( i.e. to a new segment ) to our 32 - bit
