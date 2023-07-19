@@ -1,7 +1,7 @@
 ; GDT
 ; Implementing flat memory model
 ; Comments reflect a Big endian view check in the binary output and see that it follows little endian.
-
+times 8-(($-$$)% 8) db 0xaa
 gdt_start:
 
 gds_null:       ;mandatory null descriptor
